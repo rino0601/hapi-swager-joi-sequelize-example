@@ -10,7 +10,7 @@ var fs        = require('fs'),
     basename  = path.basename(module.filename),
     env       = process.env.NODE_ENV || 'development',
     log       = (!process.env.LOG || process.env.LOG === 'false') ? false : true,
-    config    = require(__dirname + '/../config/database.json')[env],
+    config    = require(__dirname + '/../config/config.json')[env],
     db,
     sequelize;
 
