@@ -42,10 +42,10 @@ function init() {
     });
     
   Object.keys(db).forEach(function (modelName) {
-        if (db[modelName].associate) {
-          db[modelName].associate(db);
-        }
-      });
+    if (db[modelName].associate) {
+      db[modelName].associate(db);
+    }
+  });
  
   Object.keys(db).forEach(function (modelName) {
     if (db[modelName].addScopes) {
@@ -56,7 +56,7 @@ function init() {
       db[modelName].addHooks(db);
     }
   });
-  
+  console.log("sequelize database.Association", db.sequelize);
   return db;
 }
  

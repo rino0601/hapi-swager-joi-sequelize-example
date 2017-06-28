@@ -14,7 +14,7 @@
     "inert": "^4.2.0",
     "joi": "^10.6.0",
     "joi-sequelize": "^0.2.8",
-    "sequelize": "^4.2.0",
+    "sequelize": "^3.30.4",
     "vision": "^4.1.1"
   },
   "devDependencies": {

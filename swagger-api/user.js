@@ -5,7 +5,7 @@ const JS = db.JS;
 
 module.exports=[{
 	method: 'POST',
-    path: '/user',
+    path: '/user_by_custom',
     config: {
         handler: (request, reply) => {
         	db.User.create(request.payload).then(user => {
@@ -19,7 +19,7 @@ module.exports=[{
     }
 },{
 	method: 'GET',
-    path: '/user',
+    path: '/user_by_custom',
     config: {
         handler: (request, reply) => {
         	db.User.findAll().then(users=>{
@@ -30,7 +30,7 @@ module.exports=[{
     }
 },{
 	method: 'GET',
-    path: '/user/{id}',
+    path: '/user_by_custom/{id}',
     config: {
         handler: (request, reply) => { 
         	db.User.findById(request.params.id).then(userOrNull=>{
@@ -51,7 +51,7 @@ module.exports=[{
     }
 },{
 	method: 'PUT',
-    path: '/user/{id}',
+    path: '/user_by_custom/{id}',
     config: {
         handler: (request, reply) => {
         	db.User.findById(request.params.id).then(userOrNull=>{
@@ -77,7 +77,7 @@ module.exports=[{
     }
 },{
 	method: 'DELETE',
-    path: '/user/{id}',
+    path: '/user_by_custom/{id}',
     config: {
         handler: (request, reply) => {
         	db.User.findById(request.params.id).then(userOrNull=>{
