@@ -46,7 +46,12 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here 
-        // console.log("associate","user",models);
+        // to show 1:1 relation
+        models.User.hasOne(models.Profile); // Profile will has pk.
+
+        // to show n:m relation
+        models.User.belongsToMany(models.Group,{through:'UserWithGroup'});
+        models.Group.belongsToMany(models.User,{through:'UserWithGroup'});
       }
     }
   });

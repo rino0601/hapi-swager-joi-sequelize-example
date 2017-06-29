@@ -9,7 +9,7 @@ function createCRUDAPIs(modelName) {
 	const basepath = "/"+modelName.toLowerCase();
 	const model = db[modelName];
 	const joiSchema = db.JS[modelName];
-	return [{
+	let routes = [{
 		method: 'POST',
 	    path: basepath,
 	    config: {
@@ -30,6 +30,9 @@ function createCRUDAPIs(modelName) {
 	        handler: (request, reply) => {
 	        	model.findAll().then(users=>{
 	        		reply(users).code(200); 
+	        	}).catch(error=>{
+	        		console.error(e)
+	        		reply(error);
 	        	});
 	        },
 	        tags: ['api'],
@@ -103,6 +106,42 @@ function createCRUDAPIs(modelName) {
 	        },
 	    }
 	}];
+
+	Object.keys(model.associations).forEach(modelName => {
+		const secondarypath="/"+modelName.toLowerCase();
+		const accessors = model.associations[modelName].accessors;
+		console.log(accessors);
+		const getter = accessors.get;
+		const setter = accessors.set;
+		const creater = accessors.create;
+
+		routes.push({
+			method: 'GET',
+		    path: basepath+'/{id}'+secondarypath,
+		    config: {
+		        handler: (request, reply) => {
+		        	model.findById(request.params.id).then(instanceOrNull=>{
+		        		if(instanceOrNull === null) throw Error("Not Found");
+		        		return instanceOrNull;
+		        	}).then(instance => {
+		        		return instance[getter]();
+		        	}).then(secondaryInstance => {
+		        		reply(secondaryInstance).code(200);
+		        	}).catch(err=>{
+		        		reply().code(404); 
+		        	});
+		        },
+		        tags: ['api'],
+		        validate: {
+		            params: {
+		                id: joiSchema.joi().id
+		            },
+		        },
+		    }
+		});
+	});
+
+	return routes;
 };
 
 module.exports= function(server){

@@ -56,7 +56,6 @@ function init() {
       db[modelName].addHooks(db);
     }
   });
-  console.log("sequelize database.Association", db.sequelize);
   return db;
 }
  

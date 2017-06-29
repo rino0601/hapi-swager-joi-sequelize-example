@@ -22,7 +22,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here 
-        // console.log("associate","group",models);
+        // to show 1:n relation
+        models.Residence.hasMany(models.User);
       }
     }
   });
