@@ -125,6 +125,9 @@ function createCRUDAPIs(modelName) {
 		        		return instanceOrNull;
 		        	}).then(instance => {
 		        		return instance[getter]();
+		        	}).then(secondaryInstanceOrNull =>{
+		        		if(secondaryInstanceOrNull === null) throw Error("Not Found");
+		        		return secondaryInstanceOrNull;
 		        	}).then(secondaryInstance => {
 		        		reply(secondaryInstance).code(200);
 		        	}).catch(err=>{
