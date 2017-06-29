@@ -110,10 +110,10 @@ function createCRUDAPIs(modelName) {
 	Object.keys(model.associations).forEach(modelName => {
 		const secondarypath="/"+modelName.toLowerCase();
 		const accessors = model.associations[modelName].accessors;
-		console.log(accessors);
 		const getter = accessors.get;
-		const setter = accessors.set;
-		const creater = accessors.create;
+		const oneNotMany = !accessors.count; // if accessors has count property, it is not one to one relationship.
+		// const setter = accessors.set;
+		// const creater = accessors.create;
 
 		routes.push({
 			method: 'GET',
