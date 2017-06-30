@@ -24,3 +24,8 @@ and then, open http://localhost:3000/documentation to see what happens.
 * proper One-to-one relationship handling
 * proper One-to-many relationship handling
 * proper Many-to-many relationship handling
+* provide options for...
+  * auto generate white|brack list.
+  * proper url prefix
+  * ...else?
+* auth
